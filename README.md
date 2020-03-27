@@ -62,14 +62,14 @@ If you want to run to cluster the faces in a video you should set the mode to vi
 the results are faces croped from the video and the face for each person is stored in a seperate folder 
 
 ```
-python  main.py -m vid_face_detect -fv 1.mp4
+python  main.py -m vid_face_detect -vd 1.mp4
 ```
 ### Video face tracking 
 
 If you want to track all the faces in a video and assign a unique id to them you should set the mode to vid_face_track and again -fv to the video path as below:
 
 ```
-python  main.py -m vid_face_track -fv 1.mp4
+python  main.py -m vid_face_track -vd 1.mp4
 ```
 
 The output is a video which each face is described by a unique id

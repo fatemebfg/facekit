@@ -96,7 +96,7 @@ class Face:
             if len(location)>0:
                 encoding=face_recognition.face_encodings(rgb_frame,known_face_locations=location)
                 pictures.append(dict(name=file, location=location, encoding=encoding, image=frame))
-            logzero.logfile('testlog.txt', maxBytes=1e6, backupCount=5)
+            logzero.logfile('testlog.log', maxBytes=1e6, backupCount=5)
         f = open('face_location', "wb")
         f.write(pickle.dumps(pictures))
         f.close()
@@ -169,7 +169,7 @@ class Face:
 
 
 
-        logzero.logfile('testlog', maxBytes=1e6, backupCount=5)
+        logzero.logfile('testlog.log', maxBytes=1e6, backupCount=5)
 
         f = open('face_location', "wb")
         f.write(pickle.dumps(pictures))
