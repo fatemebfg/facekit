@@ -74,7 +74,7 @@ class Face:
                 crop.save(os.path.join('clustering',str(clt.labels_[i]),str(clt.labels_[i]) +'_'+str(i)), 'png')
                 i+=1
 
-    def vid_face_detect(self,file=None):
+    def vid_face_detect(self,file=None,cluster=True):
         if file==None:
             file=self.video_dir
         input_movie=cv2.VideoCapture(file)
@@ -91,16 +91,17 @@ class Face:
                 break
 
             rgb_frame=frame[ :, :, ::-1]
-            cv2.imwrite('rgb'+str(frame_number)+'.jpg',frame)
             location=face_recognition.face_locations(rgb_frame,model='cnn')
             logger.info('frame no {} has {} faces'.format(frame_number,len(location)))
             if len(location)>0:
                 encoding=face_recognition.face_encodings(rgb_frame,known_face_locations=location)
                 pictures.append(dict(name=file, location=location, encoding=encoding, image=frame))
-            logzero.logfile('testlog', maxBytes=1e6, backupCount=5)
+            logzero.logfile('testlog.txt', maxBytes=1e6, backupCount=5)
         f = open('face_location', "wb")
         f.write(pickle.dumps(pictures))
         f.close()
+        if cluster==True:
+            self.cluster()
         self.faces = pictures
         return (pictures)
 
